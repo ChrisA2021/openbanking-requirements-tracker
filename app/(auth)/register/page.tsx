@@ -18,7 +18,7 @@ export default function Page() {
     register,
     {
       status: "idle",
-    },
+    }
   );
 
   useEffect(() => {
@@ -41,7 +41,31 @@ export default function Page() {
 
   return (
     <div className="flex h-screen w-screen items-center justify-center bg-background">
-      <div className="w-full max-w-md overflow-hidden rounded-2xl gap-12 flex flex-col">
+      <div className="w-full max-w-2xl overflow-hidden rounded-2xl gap-12 flex flex-col">
+        <section className="max-w-2xl w-full flex flex-col items-center gap-8 py-12">
+          <div className="flex flex-col items-center gap-4 text-center">
+            <img
+              src="/images/gemini-logo.png"
+              alt="OpenBanking Logo"
+              className="w-16 h-16"
+            />
+            <h1 className="text-3xl font-bold text-zinc-900 dark:text-zinc-100">
+              OpenBanking Requirements Tracker
+            </h1>
+            <p className="text-lg text-zinc-600 dark:text-zinc-300">
+              Assist organisations in adhering to the requirements of the
+              Australian Government's OpenBanking initiative.
+            </p>
+          </div>
+          <ul className="flex flex-col gap-2 text-zinc-700 dark:text-zinc-200">
+            <li>✅ Reduce infringements and compliance risks</li>
+            <li>
+              ✅ We monitor changes issued by the Australian Government: Data
+              Standards Body
+            </li>
+            <li>✅ Become best in class for regulatory compliance</li>
+          </ul>
+        </section>
         <div className="flex flex-col items-center justify-center gap-2 px-4 text-center sm:px-16">
           <h3 className="text-xl font-semibold dark:text-zinc-50">Sign Up</h3>
           <p className="text-sm text-gray-500 dark:text-zinc-400">
