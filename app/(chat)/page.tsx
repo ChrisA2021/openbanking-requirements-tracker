@@ -1,8 +1,9 @@
 "use client";
 
+import React, { useEffect } from "react";
+
 import { Chat } from "@/components/custom/chat";
 import { generateUUID } from "@/lib/utils";
-import { useEffect } from "react";
 
 export default function Page() {
   const id = generateUUID();
