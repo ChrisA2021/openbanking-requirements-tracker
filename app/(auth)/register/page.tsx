@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useActionState, useEffect, useState } from "react";
 import { toast } from "sonner";
+import Image from "next/image";
 
 import { AuthForm } from "@/components/custom/auth-form";
 import { SubmitButton } from "@/components/custom/submit-button";
@@ -44,17 +45,19 @@ export default function Page() {
       <div className="w-full max-w-2xl overflow-hidden rounded-2xl gap-12 flex flex-col">
         <section className="max-w-2xl w-full flex flex-col items-center gap-8 py-12">
           <div className="flex flex-col items-center gap-4 text-center">
-            <img
+            <Image
               src="/images/gemini-logo.png"
               alt="OpenBanking Logo"
-              className="w-16 h-16"
+              width={64}
+              height={64}
+              className="size-16"
             />
             <h1 className="text-3xl font-bold text-zinc-900 dark:text-zinc-100">
               OpenBanking Requirements Tracker
             </h1>
             <p className="text-lg text-zinc-600 dark:text-zinc-300">
               Assist organisations in adhering to the requirements of the
-              Australian Government's OpenBanking initiative.
+              Australian Government&apos;s OpenBanking initiative.
             </p>
           </div>
           <ul className="flex flex-col gap-2 text-zinc-700 dark:text-zinc-200">

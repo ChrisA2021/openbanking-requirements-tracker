@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendEmail } from "@/lib/aws/ses";
+
 import { auth } from "@/app/(auth)/auth";
+import { sendEmail } from "@/lib/aws/ses";
 
 export async function POST(req: NextRequest) {
   // Get the current session
