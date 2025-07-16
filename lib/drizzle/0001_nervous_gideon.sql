@@ -1,0 +1,1 @@
+ALTER TABLE "User" ADD COLUMN "subscribed" boolean DEFAULT false NOT NULL;
