@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Markdown } from "@/components/custom/markdown";
 
 interface TimelineIssue {
@@ -14,7 +15,7 @@ export const Timeline: React.FC<{ issues: TimelineIssue[]; summaries?: string[] 
     <div className="flex flex-col gap-6 w-full max-w-2xl mx-auto mt-8">
       {issues.map((issue, idx) => (
         <div key={issue.id} className="border-l-4 border-blue-500 pl-4 relative flex flex-row gap-6">
-          <div className="absolute left-[-10px] top-2 w-4 h-4 bg-blue-500 rounded-full border-2 border-white"></div>
+          <div className="absolute left-[-10px] top-2 size-4 bg-blue-500 rounded-full border-2 border-white"></div>
           <div className="flex flex-col gap-1 flex-1">
             <span className="text-xs text-gray-400">{new Date(issue.created_at).toLocaleString()}</span>
             <span className="font-semibold text-lg text-zinc-900 dark:text-zinc-100">{issue.title}</span>

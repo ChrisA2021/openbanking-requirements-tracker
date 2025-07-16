@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { z } from "zod";
+
 import { ISSUE_SOURCES } from "@/lib/issue-sources";
 
 // Fetch issues from a single source (GitHub or other)

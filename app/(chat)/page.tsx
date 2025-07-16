@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+
 import { Timeline } from "@/components/custom/timeline";
 
 const GITHUB_ISSUES_URL = process.env.NEXT_PUBLIC_GITHUB_ISSUES_URL;
@@ -34,8 +35,14 @@ export default function Page() {
           const topIssues = data.issues.slice(0, 10);
           setIssues(topIssues);
           // Fetch summaries from Gemini
-          const summaries = await fetchSummaries(topIssues);
-          setSummaries(summaries);
+          try {
+            const summaries = await fetchSummaries(topIssues);
+            setSummaries(summaries);
+          } catch (summarizeErr) {
+            // If Gemini fails, show issues without summaries
+            setSummaries([]);
+            console.error("Gemini summarization failed:", summarizeErr);
+          }
         } else {
           setError("No issues found.");
         }

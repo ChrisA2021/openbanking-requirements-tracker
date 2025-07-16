@@ -1,14 +1,15 @@
-import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenAI } from "@google/genai";
+import { NextRequest, NextResponse } from "next/server";
 
 const GEMINI_API_KEY = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
+const GEMINI_MODEL = process.env.GOOGLE_GENERATIVE_AI_MODEL || "gemma-3n-e2b-it";
 
 const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
 
 async function summarizeWithGemini(issue: any): Promise<string> {
   const prompt = `Summarize the following GitHub issue for a technical audience in 2-3 sentences.\n\nTitle: ${issue.title}\nBody: ${issue.body}`;
   const response = await ai.models.generateContent({
-    model: "gemini-2.5-flash",
+    model: GEMINI_MODEL,
     contents: prompt,
   });
   // The response object may differ, adjust as needed for the actual SDK
