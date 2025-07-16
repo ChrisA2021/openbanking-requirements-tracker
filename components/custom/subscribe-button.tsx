@@ -1,8 +1,10 @@
+"use client"
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "sonner";
+import { Button } from "../ui/button";
 
-export const SubscribeButton = () => {
+export const SubscribeButton = ({ className }: { className?: string }) => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -24,14 +26,12 @@ export const SubscribeButton = () => {
   };
 
   return (
-    <div className="size-full flex items-center justify-center">
-      <button
-        className="px-8 py-4 text-xl font-bold rounded-lg bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50"
-        onClick={handleSubscribe}
-        disabled={loading}
-      >
-        {loading ? "Subscribing..." : "Click here for email alerts"}
-      </button>
-    </div>
+    <Button
+      className={className ?? "py-1.5 px-2 h-fit font-normal bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-md"}
+      onClick={handleSubscribe}
+      disabled={loading}
+    >
+      {loading ? "Subscribing..." : "Click here for email alerts"}
+    </Button>
   );
 };
