@@ -6,6 +6,7 @@ interface TimelineIssue {
   title: string;
   body: string;
   created_at: string;
+  number?: number; // Add number here
 }
 
 export const Timeline: React.FC<{ issues: TimelineIssue[]; summaries?: string[] }> = ({ issues, summaries }) => {
@@ -25,6 +26,11 @@ export const Timeline: React.FC<{ issues: TimelineIssue[]; summaries?: string[] 
             <div className="flex-1 bg-zinc-50 dark:bg-zinc-800 rounded-lg p-4 shadow text-sm text-zinc-800 dark:text-zinc-200 max-w-xs">
               <div className="font-semibold mb-2 text-blue-700 dark:text-blue-300">Summary</div>
               <div>{summaries[idx]}</div>
+              {issue.number && (
+                <div className="mt-4 text-xs text-gray-500">
+                  <span className="font-semibold">GitHub Issue #</span> {issue.number}
+                </div>
+              )}
             </div>
           )}
         </div>

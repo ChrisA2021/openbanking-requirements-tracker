@@ -1,22 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
+import { GoogleGenAI } from "@google/genai";
 
 const GEMINI_API_KEY = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
-const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=";
+
+const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
 
 async function summarizeWithGemini(issue: any): Promise<string> {
-  const prompt = `Summarize the following GitHub issue for a non-technical audience in 2-3 sentences:\n\nTitle: ${issue.title}\nBody: ${issue.body}`;
-  const res = await fetch(GEMINI_API_URL + GEMINI_API_KEY, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      contents: [{ parts: [{ text: prompt }] }],
-    }),
+  const prompt = `Summarize the following GitHub issue for a technical audience in 2-3 sentences.\n\nTitle: ${issue.title}\nBody: ${issue.body}`;
+  const response = await ai.models.generateContent({
+    model: "gemini-2.5-flash",
+    contents: prompt,
   });
-  if (!res.ok) return "(Failed to summarize)";
-  const data = await res.json();
-  return (
-    data?.candidates?.[0]?.content?.parts?.[0]?.text || "(No summary available)"
-  );
+  // The response object may differ, adjust as needed for the actual SDK
+  return response.text || "(No summary available)";
 }
 
 export async function POST(req: NextRequest) {
