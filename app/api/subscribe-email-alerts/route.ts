@@ -1,15 +1,14 @@
-import { NextRequest, NextResponse } from "next/server";
-
-import { auth } from "@/app/(auth)/auth";
-import { sendEmail } from "@/lib/aws/ses";
-import { drizzle } from "drizzle-orm/postgres-js";
-
-import { user } from "@/db/schema";
 import { eq } from "drizzle-orm";
+import { drizzle } from "drizzle-orm/postgres-js";
+import { NextRequest, NextResponse } from "next/server";
 import postgres from "postgres";
 
+import { auth } from "@/app/(auth)/auth";
+import { user } from "@/db/schema";
+import { sendEmail } from "@/lib/aws/ses";
+
 let client = postgres(`${process.env.POSTGRES_URL!}?sslmode=require`);
-export let db = drizzle(client);
+const db = drizzle(client);
 
 export async function POST(req: NextRequest) {
   // Get the current session

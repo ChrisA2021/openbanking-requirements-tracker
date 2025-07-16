@@ -1,6 +1,6 @@
+import { Analytics } from "@vercel/analytics/react";
 import { Metadata } from "next";
 import { Toaster } from "sonner";
-import { Analytics } from "@vercel/analytics/react";
 
 import { Navbar } from "@/components/custom/navbar";
 import { ThemeProvider } from "@/components/custom/theme-provider";
