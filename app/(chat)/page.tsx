@@ -56,7 +56,7 @@ export default function Page() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center w-full min-h-screen bg-background pt-12">
+    <div className="flex flex-col items-center w-full min-h-screen bg-background pt-24">
       <h1 className="text-2xl font-bold mb-4">Recent Issues Timeline</h1>
       {loading && <div className="text-gray-500">Loading...</div>}
       {error && <div className="text-red-500">{error}</div>}
