@@ -1,9 +1,29 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
-
-import { LogoGoogle, MessageIcon, VercelIcon } from "./icons";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export const Overview = () => {
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const handleSubscribe = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/subscribe-email-alerts", { method: "POST" });
+      const data = await res.json();
+      if (res.ok) {
+        toast.success(data.message || "You are now subscribed for email alerts!");
+      } else {
+        toast.error(data.error || "Failed to subscribe for email alerts.");
+      }
+    } catch (e) {
+      toast.error("An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <motion.div
       key="overview"
@@ -13,36 +33,14 @@ export const Overview = () => {
       exit={{ opacity: 0, scale: 0.98 }}
       transition={{ delay: 0.5 }}
     >
-      <div className="border-none bg-muted/50 rounded-2xl p-6 flex flex-col gap-4 text-zinc-500 text-sm dark:text-zinc-400 dark:border-zinc-700">
-        <p className="flex flex-row justify-center gap-4 items-center text-zinc-900 dark:text-zinc-50">
-          <VercelIcon />
-          <span>+</span>
-          <MessageIcon />
-        </p>
-        <p>
-          This is an open source Chatbot template powered by the Google Gemini
-          model built with Next.js and the AI SDK by Vercel. It uses the{" "}
-          <code className="rounded-sm bg-muted-foreground/15 px-1.5 py-0.5">
-            streamText
-          </code>{" "}
-          function in the server and the{" "}
-          <code className="rounded-sm bg-muted-foreground/15 px-1.5 py-0.5">
-            useChat
-          </code>{" "}
-          hook on the client to create a seamless chat experience.
-        </p>
-        <p>
-          {" "}
-          You can learn more about the AI SDK by visiting the{" "}
-          <Link
-            className="text-blue-500 dark:text-blue-400"
-            href="https://sdk.vercel.ai/docs"
-            target="_blank"
-          >
-            Docs
-          </Link>
-          .
-        </p>
+      <div className="flex h-full w-full items-center justify-center">
+        <button
+          className="px-8 py-4 text-xl font-bold rounded-lg bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50"
+          onClick={handleSubscribe}
+          disabled={loading}
+        >
+          {loading ? "Subscribing..." : "Click here for email alerts"}
+        </button>
       </div>
     </motion.div>
   );
