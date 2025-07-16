@@ -2,7 +2,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "sonner";
 
-export const Overview = () => {
+export const SubscribeButton = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
