@@ -1,1 +1,1 @@
-ALTER TABLE "User" ADD COLUMN "subscribed" boolean DEFAULT false NOT NULL;
+ALTER TABLE "User" ADD COLUMN IF NOT EXISTS "subscribed" boolean DEFAULT false NOT NULL;
