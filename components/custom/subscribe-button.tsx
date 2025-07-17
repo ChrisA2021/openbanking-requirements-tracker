@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "sonner";
+
 import { Button } from "../ui/button";
 
 export const SubscribeButton = ({ className }: { className?: string }) => {

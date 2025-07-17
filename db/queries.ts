@@ -5,7 +5,7 @@ import { desc, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 
-import { user, chat, User, reservation } from "./schema";
+import { user, chat, User, reservation, standardsMaintenanceIssue } from "./schema";
 
 // Optionally, if not using email/pass login, you can
 // use the Drizzle adapter for Auth.js / NextAuth
@@ -139,4 +139,26 @@ export async function updateReservation({
       hasCompletedPayment,
     })
     .where(eq(reservation.id, id));
+}
+
+export async function upsertStandardMaintenanceIssue({
+  githubIssueId,
+  createdAt,
+  title,
+  content,
+}: {
+  githubIssueId: string;
+  createdAt: Date;
+  title: string;
+  content: string;
+}) {
+  // Check if issue already exists
+  const existing = await db
+    .select()
+    .from(standardsMaintenanceIssue)
+    .where(eq(standardsMaintenanceIssue.githubIssueId, githubIssueId));
+  if (existing.length > 0) return false;
+  // Insert new issue
+  await db.insert(standardsMaintenanceIssue).values({ githubIssueId, createdAt, title, content });
+  return true;
 }

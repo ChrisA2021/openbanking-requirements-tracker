@@ -7,6 +7,7 @@ import {
   json,
   uuid,
   boolean,
+  text,
 } from "drizzle-orm/pg-core";
 
 export const user = pgTable("User", {
@@ -42,3 +43,13 @@ export const reservation = pgTable("Reservation", {
 });
 
 export type Reservation = InferSelectModel<typeof reservation>;
+
+export const standardsMaintenanceIssue = pgTable("standards_maintenance_issues", {
+  id: uuid("id").primaryKey().notNull().defaultRandom(),
+  githubIssueId: varchar("github_issue_id", { length: 32 }).notNull(),
+  createdAt: timestamp("created_at").notNull(),
+  title: varchar("title", { length: 256 }).notNull(),
+  content: text("content").notNull(),
+});
+
+export type StandardsMaintenanceIssue = InferSelectModel<typeof standardsMaintenanceIssue>;

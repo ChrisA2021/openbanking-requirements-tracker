@@ -4,6 +4,7 @@ import Link from "next/link";
 import { auth, signOut } from "@/app/(auth)/auth";
 
 import { SlashIcon } from "./icons";
+import { SubscribeButton } from "./subscribe-button";
 import { ThemeToggle } from "./theme-toggle";
 import { Button } from "../ui/button";
 import {
@@ -12,7 +13,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { SubscribeButton } from "./subscribe-button";
 
 export const Navbar = async () => {
   let session = await auth();

@@ -1,5 +1,6 @@
 import { NextRequest } from "next/server";
 
+import { upsertStandardMaintenanceIssue } from "@/db/queries";
 import { ISSUE_SOURCES } from "@/lib/issue-sources";
 
 // Fetch issues from a single source (GitHub or other)
@@ -14,7 +15,17 @@ async function fetchIssuesFromSource(source: typeof ISSUE_SOURCES[number], token
     if (!res.ok) {
       throw new Error(`GitHub API error: ${res.status}`);
     }
-    return res.json();
+    const issues = await res.json();
+    // Store each issue in standards_maintenance_issues table
+    for (const issue of issues) {
+      await upsertStandardMaintenanceIssue({
+        githubIssueId: String(issue.id),
+        createdAt: new Date(issue.created_at),
+        title: issue.title,
+        content: issue.body || "",
+      });
+    }
+    return issues;
   }
   // Add more source types as needed
   throw new Error(`Unsupported source type: ${source.type}`);
